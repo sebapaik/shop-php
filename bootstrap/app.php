@@ -1,12 +1,28 @@
 <?php
 
 use Cart\App;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = new App;
+
+$capsule = new Capsule;
+$capsule->addConnection([
+  'driver' => 'mysql',
+  'host' => 'upsshipperdb.cjwlxwtpkwia.sa-east-1.rds.amazonaws.com',
+  'database' => 'UPSShipperDB',
+  'username' => 'master',
+  'password' => 'gg5ataw3plg',
+  'charset' => 'utf8',
+  'collation' => 'utf8_unicode_ci',
+  'prefix' => ''
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
 require __DIR__ . '/../app/routes.php';
  ?>
